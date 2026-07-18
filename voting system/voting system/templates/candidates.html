@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="http://127.0.0.1:5000/static/images/fevicon.png" type="image/x-icon">
+  <title>Voting System</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link href="http://127.0.0.1:5000/static/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="http://127.0.0.1:5000/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="http://127.0.0.1:5000/static/css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="http://127.0.0.1:5000/static/images/background.jpeg" alt="">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand " href="/"> Voting System </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  ">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Signout</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- end header section -->
+
+  <!-- contact section -->
+  <section class="contact_section ">
+    <div>
+
+      <div class="row">
+        <div class="col-lg-2" style="background-color: rgba(0, 0, 0, 0.5);color: white;height: 100vh;padding-left: 40px;">
+          <a href="/voterslist" class="btn btn-success form-control">Voters List</a><br><br>
+          <a href="/addvoter" class="btn btn-success form-control">Add Voters</a><br><br>
+          <a href="/candidateslist" class="btn btn-success form-control">Candidates List</a><br><br>
+          <a href="/addcandidate" class="btn btn-success form-control">Add Candidates</a><br><br>
+          <a href="/result" class="btn btn-success form-control">Result</a><br><br>
+        </div>
+      
+  <div class="col-lg-10" style="background-color: white;padding: 25px;overflow: scroll;">
+    {% if result %}
+    <center><h3>CANDIDATE LIST</h3></center>
+        <table class="table">
+          <tr>
+            <th>Election Symbol</th>
+            <th>Profile</th>
+            <th>Name</th>
+            <th>Adhar Number</th>
+            <th>Party</th>
+            <th>Place</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Update</th>
+            
+          </tr>
+          {% for row in result %}
+          <tr>
+            <td><img src="data:image/jpg;base64,{{row[-2]}}" style="width: 50px;height:50px;border-radius: 50%;"></td>
+            <td><img src="data:image/jpg;base64,{{row[-1]}}" style="width: 50px;height:50px;border-radius: 50%;"></td>
+            {% for col in row[1:-2] %}
+              <td>
+                {{col}}
+              </td>
+            {% endfor %}
+            {% set Id = row[0] %}
+            <td><a href="{{url_for('removecandidate', Id=Id)}}" class="btn btn-primary">Remove</a>
+              <a href="{{url_for('updatecondidate', Id=Id)}}" class="btn btn-primary">Edit</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+      <div class="alert alert-info">
+        <strong>Voters not found</strong>
+      </div>
+      {% endif %}
+  </div>
+</div>
+</div>
+</section>
+  
+  <!-- jQery -->
+  <script src="http://127.0.0.1:5000/static/js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script src="http://127.0.0.1:5000/static/js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- custom js -->
+  <script src="http://127.0.0.1:5000/static/js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
+</body>
+
+</html>

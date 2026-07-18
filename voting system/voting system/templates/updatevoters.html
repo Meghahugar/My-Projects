@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="http://127.0.0.1:5000/static/images/fevicon.png" type="image/x-icon">
+  <title>Voting System</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link href="http://127.0.0.1:5000/static/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="http://127.0.0.1:5000/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="http://127.0.0.1:5000/static/css/responsive.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="hero_area">
+    <div class="hero_bg_box">
+      <img src="http://127.0.0.1:5000/static/images/background.jpg" alt="">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand " href="/"> Voting System </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  ">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Signout</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- end header section -->
+
+  <!-- contact section -->
+  <section class="contact_section ">
+    <div>
+
+      <div class="row">
+        <div class="col-lg-2" style="background-color: rgba(0, 0, 0, 0.5);color: white;height: 100vh;padding-left: 40px;">
+          <a href="/voterslist" class="btn btn-success form-control">Voters List</a><br><br>
+          <a href="/addvoter" class="btn btn-success form-control">Add Voters</a><br><br>
+          <a href="/candidateslist" class="btn btn-success form-control">Candidates List</a><br><br>
+          <a href="/addcandidate" class="btn btn-success form-control">Add Candidates</a><br><br>
+          <a href="/result" class="btn btn-success form-control">Result</a><br><br>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-6" style="background-color: rgba(0, 0, 0, 0.5);color: white;">
+
+          {% if msg %}
+          <div class="alert alert-info">
+            <strong>{{msg}}</strong>
+          </div>
+          {% endif %}
+          <div class="form_container">
+            <div class="heading_container heading_center">
+              <h2>Update Voters</h2>
+            </div>
+            <form action="/votersupdate" method="post" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Full Name" value="{{result[1]}}" name="voter_name" required />
+                  </div>
+
+                  <div class="form-group">
+                    <input type="text" class="form-control" pattern="[0-9]{12}" 
+                    title="Aadhaar number must be exactly 12 digits (0-9)" placeholder="Aadhaar Number"  value="{{result[2]}}" name="aadhaar_number" required pattern="\d{12}" title="Enter a 12-digit Aadhaar number" />
+                  </div>
+
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email Address" value="{{result[3]}}" name="email" required />
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" pattern="[6-9]{1}[0-9]{9}" 
+                    title="Phone number with 6-9 and remaing 9 digit with 0-9" placeholder="Phone Number" name="phone" value="{{result[4]}}" required pattern="\d{10}" title="Enter a valid 10-digit phone number" />
+                  </div>
+
+              </div>            
+              <div class="col-lg-6">
+                
+                  
+                  <div class="form-group">
+                    <select class="form-control" placeholder="Place" name="place" required>
+                      <option value="{{result[5]}}">{{result[5]}}</option>
+                      <option value="bagalkot">Bagalkot</option>
+                      <option value="ballari">Ballari (Bellary)</option>
+                      <option value="belagavi">Belagavi (Belgaum)</option>
+                      <option value="bengaluru-rural">Bengaluru Rural</option>
+                      <option value="bengaluru-urban">Bengaluru Urban</option>
+                      <option value="bidar">Bidar</option>
+                      <option value="chamarajanagar">Chamarajanagar</option>
+                      <option value="chikkaballapur">Chikkaballapur</option>
+                      <option value="chikkamagaluru">Chikkamagaluru (Chikmagalur)</option>
+                      <option value="chitradurga">Chitradurga</option>
+                      <option value="dakshina-kannada">Dakshina Kannada</option>
+                      <option value="davangere">Davangere</option>
+                      <option value="dharwad">Dharwad</option>
+                      <option value="gadag">Gadag</option>
+                      <option value="hassan">Hassan</option>
+                      <option value="haveri">Haveri</option>
+                      <option value="kalaburagi">Kalaburagi (Gulbarga)</option>
+                      <option value="kodagu">Kodagu</option>
+                      <option value="kolar">Kolar</option>
+                      <option value="koppal">Koppal</option>
+                      <option value="mandya">Mandya</option>
+                      <option value="mysuru">Mysuru (Mysore)</option>
+                      <option value="raichur">Raichur</option>
+                      <option value="ramanagara">Ramanagara</option>
+                      <option value="shivamogga">Shivamogga (Shimoga)</option>
+                      <option value="tumakuru">Tumakuru (Tumkur)</option>
+                      <option value="udupi">Udupi</option>
+                      <option value="uttara-kannada">Uttara Kannada (Karwar)</option>
+                      <option value="vijayapura">Vijayapura (Bijapur)</option>
+                      <option value="yadgir">Yadgir</option>
+                  </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="dob"> Date of Birth</label>
+                    <input type="date" class="form-control" value="{{result[6]}}" placeholder="Date of Birth" name="dob" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="image">Profile Photo</label>
+                    <input type="file" class="form-control" name="profile" required />
+                  </div>
+
+              </div>
+              </div>
+            
+              <div class="btn_box">
+                <button>
+                  Update Voter
+                </button>
+              </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end contact section -->
+</div>
+  
+  <!-- jQery -->
+  <script src="http://127.0.0.1:5000/static/js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script src="http://127.0.0.1:5000/static/js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
+  <!-- custom js -->
+  <script src="http://127.0.0.1:5000/static/js/custom.js"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  <!-- End Google Map -->
+</body>
+
+</html>
